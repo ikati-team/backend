@@ -31,8 +31,8 @@ class SoshialNetwork(models.Model):
     link = models.URLField()
 
     class Meta:
-        verbose_name = "soshial network"
-        verbose_name_plural = "soshial networks"
+        verbose_name = "social network"
+        verbose_name_plural = "social networks"
 
 
 class Profile(models.Model):
