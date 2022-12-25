@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from django.contrib.auth.models import User
-from user_profile.models import Profile, Skill
+from user_profile.models import Profile, Skill, SocialNetwork
 
 
 class SkillSerializer(serializers.HyperlinkedModelSerializer):
@@ -10,12 +10,19 @@ class SkillSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['name', 'description']
 
 
+class SocialNetworkSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = SocialNetwork
+        fields = ['type', 'link']
+
+
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     skill = SkillSerializer(many=True)
+    social_networks = SocialNetworkSerializer
 
     class Meta:
         model = Profile
-        fields = ['city', 'biography', 'skill', 'preference_role']
+        fields = ['city', 'biography', 'skill', 'social_networks', 'preference_role']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
