@@ -1,5 +1,5 @@
 from django.db import models
-from django.conf import settings
+from django.contrib.auth.models import User
 
 
 class Skill(models.Model):
@@ -19,11 +19,12 @@ class Skill(models.Model):
 class Profile(models.Model):
     """User's profile"""
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+        User, related_name='profile',
+        on_delete=models.PROTECT)
     city = models.CharField(max_length=100, help_text="City where you live",  blank=True, default='')
     biography = models.TextField(help_text="Tell everyone about yourself",  blank=True, default='')
     skill = models.ManyToManyField(Skill, help_text="things you can do, techs you know", blank=True)
-    preference_role = models.CharField(max_lenght=200)
+    preference_role = models.CharField(max_length=200)
 
     def __str__(self):
         return self.user.username
@@ -50,11 +51,11 @@ class SocialNetwork(models.Model):
 
 class Comment(models.Model):
     """User's profile comment"""
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    profile = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name='profile')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     mark = models.PositiveSmallIntegerField()
     text = models.TextField()
-    target = models.ForeignKey(
-        Profile, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.author.username} - {self.target}"
