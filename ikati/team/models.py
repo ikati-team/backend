@@ -16,7 +16,7 @@ class Team(models.Model):
 class TeamMember(models.Model):
     """User in team representation"""
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_member')
     role = models.CharField(max_length=100)
 
     def __str__(self):
