@@ -1,8 +1,7 @@
 from rest_framework import permissions, viewsets
 
 from django.contrib.auth.models import User
-from user_profile.models import Profile
-from user_profile.serializers import UserSerializer, ProfileSerializer
+from user_profile.serializers import UserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -10,8 +9,3 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-
-class ProfileViewSet(viewsets.ModelViewSet):
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
-    permission_classes = [permissions.IsAuthenticated]

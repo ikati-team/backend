@@ -23,7 +23,7 @@ class Profile(models.Model):
         on_delete=models.PROTECT)
     city = models.CharField(max_length=100, help_text="City where you live",  blank=True, default='')
     biography = models.TextField(help_text="Tell everyone about yourself",  blank=True, default='')
-    skill = models.ManyToManyField(Skill, help_text="things you can do, techs you know", blank=True)
+    skill = models.ManyToManyField(Skill, help_text="things you can do, techs you know", blank=True, null=True)
     preference_role = models.CharField(max_length=200)
 
     def __str__(self):
