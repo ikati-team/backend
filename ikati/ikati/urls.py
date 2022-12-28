@@ -20,6 +20,8 @@ from rest_framework import routers
 from user_profile.views import UserViewSet
 from team.views import TeamViewSet
 
+from authentication.views import LoginView
+
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
@@ -28,5 +30,5 @@ router.register(r'teams', TeamViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('login/', LoginView.as_view()),
 ]
