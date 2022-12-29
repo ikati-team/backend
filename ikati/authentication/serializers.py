@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
+from django.views.decorators.csrf import csrf_exempt
 
 
 class LoginSerializer(serializers.Serializer):
@@ -14,6 +15,7 @@ class LoginSerializer(serializers.Serializer):
         write_only=True
     )
 
+    @csrf_exempt
     def validate(self, attrs):
         username = attrs.get('username')
         password = attrs.get('password')
