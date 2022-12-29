@@ -110,16 +110,6 @@ REST_FRAMEWORK = {
     ]
 }
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:8000'
-],
-ALLOWED_HOSTS = [
-    'localhost',
-],
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8000',
-]
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 

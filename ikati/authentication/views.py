@@ -19,3 +19,16 @@ class LoginView(views.APIView):
         user = serializer.validated_data['user']
         login(request, user)
         return Response(None, status=status.HTTP_202_ACCEPTED)
+
+
+class RegisterView(views.APIView):
+    permission_classes = (permissions.AllowAny)
+
+    @csrf_exempt
+    def post(self, request, format=None):
+        serializer = serializers.LoginSerializer(data=self.request.data,
+                                                 context={'request': self.request })
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+
+        return Response(None, status=status.HTTP_202_ACCEPTED)
