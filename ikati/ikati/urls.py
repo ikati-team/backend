@@ -32,5 +32,6 @@ router.register(r'current_user_teams', CurrentUserTeamsViewSet, basename='curren
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    path('login/', LoginView.as_view()),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
 ]

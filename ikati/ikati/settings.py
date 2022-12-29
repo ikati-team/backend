@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'djoser',
     'authentication',
     'notifications',
     'user_profile',
@@ -103,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
@@ -111,7 +113,7 @@ REST_FRAMEWORK = {
 }
 
 ALLOWED_HOSTS = [
-    'localhost',
+    'localhost', '127.0.0.1'
 ]
 
 # Internationalization

@@ -19,3 +19,12 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Team
         fields = ['name', 'description', 'public_message', 'team_member']
+
+
+class InviteSerializer(serializers.HyperlinkedModelSerializer):
+    team = TeamSerializer()
+    target = UserSerializer()
+
+    class Meta:
+        model = Team
+        fields = ['target', 'team']
