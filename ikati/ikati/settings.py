@@ -24,10 +24,6 @@ SECRET_KEY = 'django-insecure-g#5fcu&^%zc-s54b)sedr-p#6f!!#yeb#t-j=hm9el$a8b%22f
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -115,6 +111,15 @@ REST_FRAMEWORK = {
     ]
 }
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000'
+],
+ALLOWED_HOSTS = [
+    'localhost',
+],
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8000',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
