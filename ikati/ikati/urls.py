@@ -18,7 +18,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 from user_profile.views import UserViewSet
-from team.views import TeamViewSet, CurrentUserInviteViewSet
+from team.views import TeamViewSet, CreateTeamViewSet, CurrentUserInviteViewSet
 from search.views import CurrentUserViewSet, CurrentUserTeamsViewSet
 from authentication.views import LoginView
 
@@ -26,6 +26,7 @@ from authentication.views import LoginView
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'teams', TeamViewSet)
+router.register(r'team_create', CreateTeamViewSet)
 router.register(r'current_user', CurrentUserViewSet, basename='current_user')
 router.register(r'current_user_teams', CurrentUserTeamsViewSet, basename='current_user_teans')
 router.register(r'invites', CurrentUserInviteViewSet, basename='invites')
