@@ -19,7 +19,7 @@ from rest_framework import routers
 
 from user_profile.views import UserViewSet
 from team.views import TeamViewSet
-from search.views import CurrentUserViewSet
+from search.views import CurrentUserViewSet, CurrentUserTeamsViewSet
 from authentication.views import LoginView
 
 
@@ -27,6 +27,7 @@ router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'teams', TeamViewSet)
 router.register(r'current_user', CurrentUserViewSet, basename='current_user')
+router.register(r'current_user_teams', CurrentUserTeamsViewSet, basename='current_user_teans')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
