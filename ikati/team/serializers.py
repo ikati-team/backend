@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from team.models import Team, TeamMember
+from team.models import Team, TeamMember, Invite
 
 from user_profile.serializers import UserSerializer
 
@@ -19,3 +19,12 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Team
         fields = ['id', 'name', 'description', 'public_message', 'team_member']
+
+
+class InviteSerializer(serializers.HyperlinkedModelSerializer):
+    target = UserSerializer
+    team = TeamSerializer
+
+    class Meta:
+        model = Invite
+        fields = ['target', 'team']

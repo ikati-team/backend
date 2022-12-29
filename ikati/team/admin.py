@@ -12,6 +12,11 @@ class TeamMemberAdmin(admin.ModelAdmin):
     model = TeamMember
 
 
+@admin.register(Invite)
+class InviteAdmin(admin.ModelAdmin):
+    model = Invite
+
+
 @admin.register(TextNote)
 class TeamAdmin(admin.ModelAdmin):
     model = TextNote
