@@ -33,3 +33,8 @@ class TextNote(models.Model):
     class Meta:
         verbose_name = "text note"
         verbose_name_plural = "text notes"
+
+
+class Invite(models.Model):
+    target = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    team = models.OneToOneField(Team, on_delete=models.CASCADE)

@@ -10,7 +10,7 @@ class TeamMemberSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = TeamMember
-        fields = ['role', 'user']
+        fields = ['team', 'role', 'user']
 
 
 class TeamSerializer(serializers.HyperlinkedModelSerializer):
