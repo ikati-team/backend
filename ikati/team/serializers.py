@@ -18,4 +18,4 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Team
-        fields = ['name', 'description', 'public_message', 'team_member']
+        fields = ['id', 'name', 'description', 'public_message', 'team_member']
