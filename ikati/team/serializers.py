@@ -36,7 +36,7 @@ class CreateTeamSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Team
-        fields = ['name', 'public_message', 'role']
+        fields = ['id', 'name', 'public_message', 'role']
 
 
 class TeamSerializer(serializers.HyperlinkedModelSerializer):
