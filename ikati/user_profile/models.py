@@ -39,7 +39,7 @@ class SocialNetwork(models.Model):
 
     type = models.CharField(max_length=30, choices=Type.choices)
     link = models.URLField()
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='social_networks')
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='social_network')
 
     class Meta:
         verbose_name = "social network"

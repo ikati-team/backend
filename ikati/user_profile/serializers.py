@@ -18,11 +18,11 @@ class SocialNetworkSerializer(serializers.HyperlinkedModelSerializer):
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     skill = SkillSerializer(many=True)
-    social_networks = SocialNetworkSerializer
+    social_network = SocialNetworkSerializer(many=True)
 
     class Meta:
         model = Profile
-        fields = ['city', 'biography', 'skill', 'social_networks', 'preference_role']
+        fields = ['city', 'biography', 'skill', 'social_network', 'preference_role']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
