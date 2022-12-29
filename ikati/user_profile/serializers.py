@@ -28,6 +28,9 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     profile = ProfileSerializer()
 
+    def create(self, validated_data):
+        return User.objects.create(**validated_data)
+
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name', 'last_name',
