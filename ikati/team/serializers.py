@@ -63,7 +63,7 @@ class InviteSerializer(serializers.HyperlinkedModelSerializer):
 
 class CreateInviteSerializer(serializers.HyperlinkedModelSerializer):
     team = LiteTeamSerializer()
-    user = LiteUserSerializer()
+    target = LiteUserSerializer()
 
     def create(self, validated_data):
         target = User.objects.get(id=validated_data['user_id'])
@@ -73,4 +73,5 @@ class CreateInviteSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Invite
-        fields = ['team', 'user']
+        fields = ['team', 'target']
+

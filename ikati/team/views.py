@@ -46,4 +46,4 @@ class CurrentUserInviteViewSet(viewsets.ModelViewSet):
 
 class CreateInviteViewSet(viewsets.ModelViewSet):
     serializer_class = CreateInviteSerializer
-    queryset = Team.objects.all()
+    queryset = Invite.objects.all()
