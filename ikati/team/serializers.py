@@ -58,7 +58,7 @@ class InviteSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Invite
-        fields = ['team']
+        fields = ['id', 'team']
 
 
 class CreateInviteSerializer(serializers.HyperlinkedModelSerializer):
