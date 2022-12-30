@@ -30,7 +30,7 @@ router.register(r'team_create', CreateTeamViewSet)
 router.register(r'current_user', CurrentUserViewSet, basename='current_user')
 router.register(r'current_user_teams', CurrentUserTeamsViewSet, basename='current_user_teans')
 router.register(r'invites', CurrentUserInviteViewSet, basename='invites')
-router.register(r'invites/create', CreateInviteViewSet, basename='invites_create')
+router.register(r'invite_create', CreateInviteViewSet, basename='invite_create')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
