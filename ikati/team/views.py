@@ -40,5 +40,5 @@ class CurrentUserInviteViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         print(self.request.user)
-        invites = Invite.objects.get(target=self.request.user)
+        invites = Invite.objects.filter(target=self.request.user)
         return invites
