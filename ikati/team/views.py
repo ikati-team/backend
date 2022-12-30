@@ -4,7 +4,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 from team.models import Team, Invite
-from team.serializers import TeamSerializer, CreateTeamSerializer, InviteSerializer
+from team.serializers import TeamSerializer, CreateTeamSerializer, InviteSerializer, CreateInviteSerializer
 
 
 class TeamViewSet(viewsets.ModelViewSet):
@@ -26,6 +26,7 @@ class CreateTeamViewSet(viewsets.ModelViewSet):
     def dispatch(self, *args, **kwargs):
         return super(CreateTeamViewSet, self).dispatch(*args, **kwargs)
 
+
 # class InviteViewSet(viewsets.ModelViewSet):
 #     queryset = User.objects.all()
 #     serializer_class = UserSerializer
@@ -37,6 +38,14 @@ class CreateTeamViewSet(viewsets.ModelViewSet):
 
 class CurrentUserInviteViewSet(viewsets.ModelViewSet):
     serializer_class = InviteSerializer
+
+    def get_queryset(self):
+        print(self.request.user)
+        invites = Invite.objects.filter(target=self.request.user)
+        return invites
+
+class CreateInviteViewSet(viewsets.ModelViewSet):
+    serializer_class = CreateInviteSerializer
 
     def get_queryset(self):
         print(self.request.user)

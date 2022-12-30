@@ -18,7 +18,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 from user_profile.views import UserViewSet
-from team.views import TeamViewSet, CreateTeamViewSet, CurrentUserInviteViewSet
+from team.views import TeamViewSet, CreateTeamViewSet, CurrentUserInviteViewSet, CreateInviteViewSet
 from search.views import CurrentUserViewSet, CurrentUserTeamsViewSet
 from authentication.views import LoginView
 
@@ -30,6 +30,7 @@ router.register(r'team_create', CreateTeamViewSet)
 router.register(r'current_user', CurrentUserViewSet, basename='current_user')
 router.register(r'current_user_teams', CurrentUserTeamsViewSet, basename='current_user_teans')
 router.register(r'invites', CurrentUserInviteViewSet, basename='invites')
+router.register(r'invites/create', CreateInviteViewSet, basename='invites_create')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

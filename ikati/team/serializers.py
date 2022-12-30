@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from team.models import Team, TeamMember, Invite
 
-from user_profile.serializers import UserSerializer
+from user_profile.serializers import UserSerializer, LiteUserSerializer
 from django.contrib.auth.models import User
 
 
@@ -47,9 +47,24 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'name', 'description', 'public_message', 'team_member']
 
 
+class LiteTeamSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Team
+        fields = ['id']
+
+
 class InviteSerializer(serializers.HyperlinkedModelSerializer):
     team = TeamSerializer()
 
     class Meta:
         model = Invite
         fields = ['team']
+
+
+class CreateInviteSerializer(serializers.HyperlinkedModelSerializer):
+    team = LiteTeamSerializer()
+    user = LiteUserSerializer()
+
+    class Meta:
+        model = Invite
+        fields = ['team', 'user']
