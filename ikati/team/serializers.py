@@ -22,9 +22,8 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class InviteSerializer(serializers.HyperlinkedModelSerializer):
-    target = UserSerializer
-    team = TeamSerializer
+    team = TeamSerializer()
 
     class Meta:
         model = Invite
-        fields = ['target', 'team']
+        fields = ['team']

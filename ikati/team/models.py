@@ -37,7 +37,6 @@ class TextNote(models.Model):
 
 class Invite(models.Model):
     target = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    text = models.TextField()
     team = models.OneToOneField(Team, on_delete=models.CASCADE)
 
     def __str__(self):

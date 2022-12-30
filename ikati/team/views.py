@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from team.models import Team, Invite
 from team.serializers import TeamSerializer, InviteSerializer
+from django.contrib.auth.models import User
 
 
 class TeamViewSet(viewsets.ModelViewSet):
@@ -31,5 +32,6 @@ class CurrentUserInviteViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         print(self.request.user)
-        invites = Invite.objects.get(target=self.request.user)
-        return invites
+        user = User.objects.get(username=self.request.user)
+        queryset = Invite.objects.filter(target=user)
+        return queryset
