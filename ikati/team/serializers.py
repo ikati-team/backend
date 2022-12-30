@@ -65,6 +65,12 @@ class CreateInviteSerializer(serializers.HyperlinkedModelSerializer):
     team = LiteTeamSerializer()
     user = LiteUserSerializer()
 
+    def create(self, validated_data):
+        target = User.objects.get(id=validated_data['user_id'])
+        team = Team.objects.get(id=validated_data['team_id'])
+        invite = Invite(target=target, team=team).save()
+        return invite
+
     class Meta:
         model = Invite
         fields = ['team', 'user']
