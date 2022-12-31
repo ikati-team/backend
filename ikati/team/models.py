@@ -36,8 +36,9 @@ class TextNote(models.Model):
 
 
 class Invite(models.Model):
-    target = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    role = models.CharField(max_length=100)
 
     def __str__(self):
-        return f"{self.target} - {self.team}"
+        return f"{self.user} - {self.team}"

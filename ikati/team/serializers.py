@@ -1,17 +1,7 @@
 from rest_framework import serializers
 
 from team.models import Team, TeamMember, Invite
-
 from user_profile.serializers import UserSerializer, LiteUserSerializer
-from django.contrib.auth.models import User
-
-
-class TeamMemberSerializer(serializers.HyperlinkedModelSerializer):
-    user = UserSerializer()
-
-    class Meta:
-        model = TeamMember
-        fields = ['team', 'role', 'user']
 
 
 class CreateTeamSerializer(serializers.HyperlinkedModelSerializer):
@@ -39,6 +29,35 @@ class CreateTeamSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'name', 'public_message', 'role']
 
 
+class LiteTeamSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Team
+        fields = ['id']
+
+
+class CreateInviteSerializer(serializers.HyperlinkedModelSerializer):
+    team = LiteTeamSerializer
+    user = LiteUserSerializer
+    role = serializers.CharField(max_length=100)
+
+    def create(self, validated_data):
+        invite = Invite(user=validated_data['user'], team=validated_data['team'], role=validated_data['role'])
+        invite.save()
+        return invite
+
+    class Meta:
+        model = Invite
+        fields = ['team', 'user', 'role']
+
+
+class TeamMemberSerializer(serializers.HyperlinkedModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = TeamMember
+        fields = ['team', 'role', 'user']
+
+
 class TeamSerializer(serializers.HyperlinkedModelSerializer):
     team_member = TeamMemberSerializer(many=True)
 
@@ -47,10 +66,19 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'name', 'description', 'public_message', 'team_member']
 
 
-class LiteTeamSerializer(serializers.HyperlinkedModelSerializer):
+class CreateTeamMemberSerializer(serializers.HyperlinkedModelSerializer):
+    team = LiteTeamSerializer()
+    user = LiteUserSerializer()
+    role = serializers.CharField(max_length=100)
+
+    def create(self, validated_data):
+        team_member = TeamMember(user=validated_data['user'], team=validated_data['team'], role=validated_data['role'])
+        team_member.save()
+        return team_member
+
     class Meta:
-        model = Team
-        fields = ['id']
+        model = TeamMember
+        fields = ['team', 'role', 'user']
 
 
 class InviteSerializer(serializers.HyperlinkedModelSerializer):
@@ -59,20 +87,3 @@ class InviteSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Invite
         fields = ['id', 'team']
-
-
-class CreateInviteSerializer(serializers.HyperlinkedModelSerializer):
-    team = LiteTeamSerializer
-    target = LiteUserSerializer
-
-
-    def create(self, validated_data):
-        invite = Invite(target=validated_data['target'], team=validated_data['team'])
-        invite.save()
-        return invite
-
-    class Meta:
-        model = Invite
-        fields = ['team', 'target']
-        extra_kwargs = {'target': {'required': False}, 'team': {'required': False}}
-

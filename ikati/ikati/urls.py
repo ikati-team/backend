@@ -17,20 +17,22 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from user_profile.views import UserViewSet
-from team.views import TeamViewSet, CreateTeamViewSet, CurrentUserInviteViewSet, CreateInviteViewSet
+from user_profile.views import UserViewSet, CreateUserViewSet
+from team.views import TeamViewSet, CreateTeamViewSet, CurrentUserInviteViewSet, CreateInviteViewSet, CreateTeamMemberViewSet
 from search.views import CurrentUserViewSet, CurrentUserTeamsViewSet
 from authentication.views import LoginView
 
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
+router.register(r'create_users', CreateUserViewSet)
 router.register(r'teams', TeamViewSet)
 router.register(r'team_create', CreateTeamViewSet)
 router.register(r'current_user', CurrentUserViewSet, basename='current_user')
 router.register(r'current_user_teams', CurrentUserTeamsViewSet, basename='current_user_teans')
 router.register(r'invites', CurrentUserInviteViewSet, basename='invites')
 router.register(r'invite_create', CreateInviteViewSet, basename='invite_create')
+router.register(r'create_team_member', CreateTeamMemberViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

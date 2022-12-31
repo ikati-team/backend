@@ -25,16 +25,42 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['city', 'biography', 'skill', 'social_network', 'preference_role']
 
 
+class CreateProfileSerializer(serializers.HyperlinkedModelSerializer):
+    skill = SkillSerializer(many=True)
+    social_network = SocialNetworkSerializer(many=True)
+
+    class Meta:
+        model = Profile
+        fields = ['city', 'biography', 'skill', 'social_network', 'preference_role']
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     profile = ProfileSerializer()
-
-    def create(self, validated_data):
-        return User.objects.create(**validated_data)
 
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name', 'last_name',
                   'email', 'profile']
+
+
+class CreateUserSerializer(serializers.HyperlinkedModelSerializer):
+    # password = serializers.CharField()
+    # username = serializers.CharField()
+
+    def create(self, validated_data):
+        user = User(username=validated_data['username'],
+                    first_name=validated_data['first_name'],
+                    last_name=validated_data['last_name'],
+                    email=validated_data['email'],
+                    password=validated_data['password'])
+        user.save()
+        return user
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name',
+                  'email', 'password']
+
 
 class LiteUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
