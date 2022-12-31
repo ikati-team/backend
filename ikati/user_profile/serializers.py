@@ -67,3 +67,18 @@ class LiteUserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ['id']
 
+
+class AllSkillsSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Skill
+        fields = ['id', 'name']
+
+
+class CreateUserProfileSerilizer(serializers.HyperlinkedModelSerializer):
+    skill = AllSkillsSerializer(many=True)
+    social_network = SocialNetworkSerializer(many=True)
+    user = LiteUserSerializer()
+
+    class Meta:
+        model = Profile
+        fields = ['user', 'city', 'biography', 'skill', 'social_network', 'preference_role']

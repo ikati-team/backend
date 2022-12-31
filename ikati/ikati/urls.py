@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from user_profile.views import UserViewSet, CreateUserViewSet
+from user_profile.views import UserViewSet, CreateUserViewSet, AllSkillsViewSet, CreateUserProfileViewSet
 from team.views import TeamViewSet, CreateTeamViewSet, CurrentUserInviteViewSet, CreateInviteViewSet, CreateTeamMemberViewSet
 from search.views import CurrentUserViewSet, CurrentUserTeamsViewSet
 from authentication.views import LoginView
@@ -25,7 +25,9 @@ from authentication.views import LoginView
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
+router.register(r'skills', AllSkillsViewSet)
 router.register(r'create_users', CreateUserViewSet)
+router.register(r'create_user_profile', CreateUserProfileViewSet)
 router.register(r'teams', TeamViewSet)
 router.register(r'team_create', CreateTeamViewSet)
 router.register(r'current_user', CurrentUserViewSet, basename='current_user')
